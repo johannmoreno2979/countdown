@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Felices 20's de mi amor ✨</title>
+
+  <!-- Fuentes alegres -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: "Nunito", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: #0b1220;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.0) 55%),
+        radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.0) 55%),
+        radial-gradient(circle at 40% 90%, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0.0) 60%),
+        linear-gradient(135deg, #b8f2ff 0%, #ffd6f5 35%, #fff3c4 70%, #c9ffe1 100%);
+    }
+
+    /* Brillitos flotando de fondo */
+    .sparkle-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.7;
+      filter: blur(0.2px);
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,0.8) 0 1px, transparent 2px),
+        radial-gradient(circle at 35% 60%, rgba(255,255,255,0.7) 0 1px, transparent 2px),
+        radial-gradient(circle at 70% 25%, rgba(255,255,255,0.8) 0 1px, transparent 2px),
+        radial-gradient(circle at 90% 70%, rgba(255,255,255,0.7) 0 1px, transparent 2px);
+      animation: floatBg 14s ease-in-out infinite alternate;
+    }
+    @keyframes floatBg {
+      0%   { transform: translate3d(-10px, -8px, 0) scale(1.01); }
+      100% { transform: translate3d(10px, 8px, 0) scale(1.03); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 960px;
+      width: 100%;
+      padding: 40px 24px;
+    }
+
+    .card {
+      border-radius: 28px;
+      padding: 28px 22px 22px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow:
+        0 18px 45px rgba(15, 23, 42, 0.18),
+        0 6px 18px rgba(15, 23, 42, 0.10);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -60%;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.18) 0, transparent 45%),
+        radial-gradient(circle at 70% 10%, rgba(236, 72, 153, 0.16) 0, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.14) 0, transparent 55%),
+        radial-gradient(circle at 20% 85%, rgba(245, 158, 11, 0.14) 0, transparent 55%);
+      pointer-events: none;
+      filter: blur(2px);
+      opacity: 0.9;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Icono feliz (carita + estrellas) */
+    .badge {
+      width: 74px;
+      height: 74px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.18), rgba(236,72,153,0.18), rgba(245,158,11,0.18));
+      border: 1px solid rgba(255,255,255,0.6);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
+    }
+
+    .badge span {
+      font-size: 34px;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.15));
+    }
+
+    h1 {
+      font-family: "Fredoka", system-ui, sans-serif;
+      font-size: clamp(2.0rem, 3.2vw, 3.0rem);
+      letter-spacing: 0.02em;
+      line-height: 1.05;
+      background: linear-gradient(90deg, #2563eb, #db2777, #f59e0b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 10px 18px rgba(15, 23, 42, 0.08);
+    }
+
+    .subtitle {
+      margin-top: 6px;
+      font-size: 0.98rem;
+      color: rgba(15, 23, 42, 0.78);
+      max-width: 520px;
+    }
+
+    .date-target {
+      margin-top: 4px;
+      font-size: 0.92rem;
+      color: rgba(15, 23, 42, 0.7);
+      font-style: italic;
+    }
+
+    .countdown {
+      position: relative;
+      z-index: 1;
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    @media (max-width: 680px) {
+      .countdown { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    .time-box {
+      border-radius: 20px;
+      padding: 16px 10px 14px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      box-shadow:
+        0 12px 28px rgba(15, 23, 42, 0.10),
+        inset 0 0 18px rgba(255, 255, 255, 0.45);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .time-box::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 30% 0%, rgba(59,130,246,0.18) 0, transparent 55%),
+        radial-gradient(circle at 70% 100%, rgba(236,72,153,0.16) 0, transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+      filter: blur(2px);
+    }
+
+    .time-value {
+      font-family: "Fredoka", system-ui, sans-serif;
+      font-size: 2.25rem;
+      letter-spacing: 0.04em;
+      color: #0b1220;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 10px 18px rgba(15, 23, 42, 0.10);
+    }
+
+    .time-label {
+      margin-top: 6px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(15, 23, 42, 0.62);
+      position: relative;
+      z-index: 1;
+    }
+
+    .progress {
+      margin-top: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .progress-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(15, 23, 42, 0.68);
+      margin-bottom: 8px;
+      opacity: 0.95;
+      text-align: center;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.08);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: inset 0 0 14px rgba(15, 23, 42, 0.10);
+    }
+
+    .progress-inner {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #2563eb, #db2777, #f59e0b, #22c55e);
+      box-shadow: 0 10px 18px rgba(15, 23, 42, 0.12);
+      transition: width 0.8s ease-out;
+    }
+
+    .message {
+      margin-top: 16px;
+      font-size: 1.05rem;
+      color: rgba(15, 23, 42, 0.85);
+      font-weight: 800;
+      text-align: center;
+      font-family: "Fredoka", system-ui, sans-serif;
+      letter-spacing: 0.03em;
+      display: none;
+    }
+
+    .message.show { display: block; }
+
+    .footer-text {
+      margin-top: 16px;
+      font-size: 0.86rem;
+      color: rgba(15, 23, 42, 0.65);
+      text-align: right;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-text span {
+      font-weight: 800;
+      background: linear-gradient(90deg, #2563eb, #db2777);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* ===== Estrellas que siguen el mouse ===== */
+    .star {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 14px;
+      height: 14px;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.95;
+      transform: translate(-50%, -50%) scale(1);
+      filter: drop-shadow(0 10px 16px rgba(15, 23, 42, 0.18));
+      will-change: transform, opacity;
+      animation: pop 700ms ease-out forwards;
+    }
+
+    @keyframes pop {
+      0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.6) rotate(0deg); }
+      15%  { opacity: 1; transform: translate(-50%, -50%) scale(1.0) rotate(10deg); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(1.7) rotate(45deg); }
+    }
+
+    /* Respeta "reducir movimiento" */
+    @media (prefers-reduced-motion: reduce) {
+      .sparkle-bg { animation: none; }
+      .star { animation: none; opacity: 0.7; }
+      .progress-inner { transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sparkle-bg"></div>
+
+  <div class="container">
+    <div class="card">
+      <header>
+        <div class="badge" aria-hidden="true"><span>😊✨</span></div>
+        <div>
+          <h1>Felices 20's de mi amor</h1>
+          <p class="subtitle">Cada segundo cuenta ✨</p>
+          <p class="date-target">Fecha límite: <strong>07/02/2026 – 12:00 a.m.</strong> (hora local)</p>
+        </div>
+      </header>
+
+      <section class="countdown" id="countdown">
+        <div class="time-box">
+          <div class="time-value" id="days">00</div>
+          <div class="time-label">Días</div>
+        </div>
+        <div class="time-box">
+          <div class="time-value" id="hours">00</div>
+          <div class="time-label">Horas</div>
+        </div>
+        <div class="time-box">
+          <div class="time-value" id="minutes">00</div>
+          <div class="time-label">Minutos</div>
+        </div>
+        <div class="time-box">
+          <div class="time-value" id="seconds">00</div>
+          <div class="time-label">Segundos</div>
+        </div>
+      </section>
+
+      <div class="progress">
+        <div class="progress-label">🌈 SE ACERCA TU CUMPLE 🌈</div>
+        <div class="progress-bar">
+          <div class="progress-inner" id="progress-bar"></div>
+        </div>
+      </div>
+
+      <div class="message" id="message">
+        ¡Llegó el día! 🎉✨ A celebrar el logro 🥳
+      </div>
+
+      <div class="footer-text">
+        Hecho con <span>mucho amor</span> ✨
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Fecha objetivo: 07 de febrero de 2026, 18:00 (hora local)
+    // (Mes 1 = febrero, porque en JS los meses van 0-11)
+    const targetDate = new Date(2026, 1, 7, 0, 0, 0, 0);
+
+    // Para el "progreso": guardamos el momento en que se abrió la página
+    const startDate = new Date();
+
+    function pad(num) {
+      return String(num).padStart(2, "0");
+    }
+
+    function updateCountdown() {
+      const now = Date.now();
+      const distance = targetDate.getTime() - now;
+
+      const daysElem = document.getElementById("days");
+      const hoursElem = document.getElementById("hours");
+      const minutesElem = document.getElementById("minutes");
+      const secondsElem = document.getElementById("seconds");
+      const messageElem = document.getElementById("message");
+      const progressBar = document.getElementById("progress-bar");
+
+      if (distance <= 0) {
+        daysElem.textContent = "00";
+        hoursElem.textContent = "00";
+        minutesElem.textContent = "00";
+        secondsElem.textContent = "00";
+        messageElem.classList.add("show");
+        progressBar.style.width = "100%";
+        return;
+      }
+
+      const totalSeconds = Math.floor(distance / 1000);
+      const days = Math.floor(totalSeconds / (3600 * 24));
+      const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      daysElem.textContent = pad(days);
+      hoursElem.textContent = pad(hours);
+      minutesElem.textContent = pad(minutes);
+      secondsElem.textContent = pad(seconds);
+
+      const totalInterval = targetDate.getTime() - startDate.getTime();
+      const elapsed = now - startDate.getTime();
+      let percent = (elapsed / totalInterval) * 100;
+      percent = Math.max(0, Math.min(100, percent));
+      progressBar.style.width = percent.toFixed(2) + "%";
+    }
+
+    // ====== Estrellas tras el puntero ======
+    const STAR_SPAWN_MS = 28;     // frecuencia (menor = más estrellas)
+    const STAR_MAX = 90;          // límite para no explotar el DOM
+    let lastSpawn = 0;
+    const stars = [];
+
+    function starSVG() {
+      // SVG inline (color con gradiente)
+      return `
+        <svg viewBox="0 0 64 64" width="14" height="14" aria-hidden="true">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#2563eb"/>
+              <stop offset="0.5" stop-color="#db2777"/>
+              <stop offset="1" stop-color="#f59e0b"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#g)" d="M32 5l7.7 15.6 17.2 2.5-12.4 12.1 2.9 17.1L32 44.9 16.6 52.3l2.9-17.1L7.1 23.1l17.2-2.5L32 5z"/>
+        </svg>
+      `;
+    }
+
+    function spawnStar(x, y) {
+      const el = document.createElement("div");
+      el.className = "star";
+      el.innerHTML = starSVG();
+
+      // Variación suave
+      const size = 10 + Math.random() * 12;
+      el.style.width = size + "px";
+      el.style.height = size + "px";
+
+      const driftX = (Math.random() - 0.5) * 18;
+      const driftY = (Math.random() - 0.5) * 18;
+
+      el.style.left = (x + driftX) + "px";
+      el.style.top  = (y + driftY) + "px";
+
+      document.body.appendChild(el);
+      stars.push(el);
+
+      // Limpieza
+      setTimeout(() => {
+        el.remove();
+        const idx = stars.indexOf(el);
+        if (idx >= 0) stars.splice(idx, 1);
+      }, 750);
+
+      // Limita el número
+      if (stars.length > STAR_MAX) {
+        const old = stars.shift();
+        if (old) old.remove();
+      }
+    }
+
+    window.addEventListener("pointermove", (e) => {
+      const now = performance.now();
+      if (now - lastSpawn < STAR_SPAWN_MS) return;
+      lastSpawn = now;
+      spawnStar(e.clientX, e.clientY);
+    }, { passive: true });
+
+    // Inicial y cada segundo
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
